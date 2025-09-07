@@ -1,0 +1,48 @@
+*{box-sizing:border-box}
+:root{
+  --bg:#0b0d12;--panel:#0f1320;--muted:#9aa3b2;--text:#f2f5f9;
+  --accent:#7ab3ff;--locked:#556081;--available:#37d99e;--active:#ffd166;--line:#9aa3b2;
+  --chip:#0d1426;--chip-border:#2a3550;
+}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,Segoe UI,Roboto,Ubuntu,Arial}
+header.app-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #181e2c;background:#0a0e1a;position:sticky;top:0;z-index:10}
+header .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header input[type=number]{width:84px;background:#0c1222;border:1px solid #1e2740;color:var(--text);padding:6px 8px;border-radius:10px}
+header button{background:#0c1222;border:1px solid #1e2740;color:var(--text);padding:6px 10px;border-radius:10px;cursor:pointer}
+header button:hover{border-color:var(--accent)}
+.pill{background:var(--chip);border:1px solid var(--chip-border);padding:6px 10px;border-radius:999px}
+
+.app-main{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 64px)}
+.sidebar{border-right:1px solid #181e2c;padding:12px;display:flex;flex-direction:column;gap:12px;background:#090e1a}
+.panel{background:var(--panel);border:1px solid #131a2b;border-radius:14px;padding:12px}
+.panel h2{margin:0 0 8px 0;font-size:16px}
+.canvas-wrap{position:relative;overflow:hidden}
+.canvas-toolbar{position:absolute;left:12px;top:12px;display:flex;gap:8px;align-items:center;z-index:5}
+.canvas-toolbar button{background:#0c1222;border:1px solid #1e2740;color:var(--text);padding:6px 10px;border-radius:10px;cursor:pointer}
+#graph{width:100%;height:calc(100vh - 64px);background:radial-gradient(1100px 700px at 45% 20%, #12182a 0%, #0b0d12 70%);user-select:none}
+
+/* Nós + labels */
+.node{cursor:grab}
+.node.dragging{cursor:grabbing}
+.node circle{stroke-width:2.25px;fill:#0e1731;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.node text{font-size:12.5px;pointer-events:none;dominant-baseline:central;fill:#e8eefc}
+.label-bg{fill:rgba(8,12,26,.9);stroke:#2b3958;stroke-width:1.1px;rx:10;ry:10}
+
+/* Ligações */
+.link{fill:none;stroke:var(--line);stroke-width:1.5px;opacity:0.9}
+.link.available{stroke-dasharray:4 4;opacity:1}
+
+/* Tooltip */
+.tooltip{position:absolute;left:0;top:0;pointer-events:none;background:#0a0f1f;border:1px solid #1c2742;padding:10px 12px;border-radius:12px;min-width:240px;max-width:360px;box-shadow:0 12px 36px rgba(0,0,0,.5);display:none}
+.tooltip h3{margin:0 0 6px 0;font-size:14px}
+.tooltip p{margin:4px 0;color:var(--muted)}
+.tag{display:inline-block;padding:2px 6px;border-radius:999px;border:1px solid #2d3a5a;margin-right:6px;color:#b3c7ff;background:#0d1426}
+hr.sep{border:0;border-top:1px solid #1a2236;margin:8px 0}
+/* título + subtítulo */
+.title-wrap{display:flex;flex-direction:column}
+.title-wrap h1{margin:0 0 2px 0}
+.subtitle{font-size:12px;color:var(--muted);line-height:1}
+
+/* (opcional) ligeiro ganho de legibilidade de labels longas */
+.node text{font-size:12.5px;letter-spacing:.1px}
+.label-bg{opacity:.95}
