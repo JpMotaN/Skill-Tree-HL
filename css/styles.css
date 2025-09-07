@@ -240,3 +240,23 @@ html, body{
   overflow: hidden;        /* evita scrollbar aparecendo */
   pointer-events: none;    /* não captura cliques quando oculta */
 }
+/* ===== Revelar/ocultar nós conforme estado ===== */
+.node { 
+  cursor: grab; 
+  transition: opacity .25s ease, filter .25s ease; 
+}
+
+/* ativo = 100% visível */
+.node.active { opacity: 1; }
+
+/* comprável (todos requisitos ok) */
+.node.available { opacity: .95; }
+
+/* indisponível (não pode aprender ainda) */
+.node.unavailable { opacity: .28; }
+.node.unavailable circle { fill:#0b1226; stroke: var(--locked); }
+.node.unavailable .label-bg { fill: rgba(8,12,26,.55); stroke:#1a243a; }
+.node.unavailable text { fill: rgba(232,238,252,.55); }
+
+/* links também “somem” quando o destino não é comprável */
+.link.locked { opacity:.25; stroke-dasharray: 3 6; }
