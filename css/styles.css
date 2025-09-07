@@ -38,6 +38,7 @@ header button:hover{border-color:var(--accent)}
 .tooltip p{margin:4px 0;color:var(--muted)}
 .tag{display:inline-block;padding:2px 6px;border-radius:999px;border:1px solid #2d3a5a;margin-right:6px;color:#b3c7ff;background:#0d1426}
 hr.sep{border:0;border-top:1px solid #1a2236;margin:8px 0}
+
 /* título + subtítulo */
 .title-wrap{display:flex;flex-direction:column}
 .title-wrap h1{margin:0 0 2px 0}
@@ -46,3 +47,40 @@ hr.sep{border:0;border-top:1px solid #1a2236;margin:8px 0}
 /* (opcional) ligeiro ganho de legibilidade de labels longas */
 .node text{font-size:12.5px;letter-spacing:.1px}
 .label-bg{opacity:.95}
+
+.saved-builds{
+  position: fixed;
+  right: 16px;          
+  left: auto;          
+  bottom: 16px;
+  background: rgba(10,16,28,.7);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  backdrop-filter: blur(4px);
+}
+
+.saved-builds .row{ display:flex; gap:8px; margin:6px 0; }
+.saved-builds input, .saved-builds select{
+  background:#0f172a; color:#e2e8f0; border:1px solid #1f2a44;
+  border-radius:8px; padding:6px 8px; min-width:220px;
+}
+.saved-builds button{ border-radius:8px; padding:6px 10px; }
+.saved-builds .danger{ background:#3b0f14; border:1px solid #7f1d1d; color:#fca5a5; }
+
+/* Faz o contêiner da árvore acompanhar a altura da página */
+.canvas-root{
+  height: auto;                    
+  min-height: calc(100vh - 80px);  
+}
+.canvas-root svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.app-main { align-items: stretch; }
+.canvas-root { overflow: visible; }
+
+.saved-builds{ right:16px; left:auto; bottom:16px; }
+
