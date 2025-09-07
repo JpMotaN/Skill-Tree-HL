@@ -75,24 +75,7 @@
 
     resetBtn.onclick = () => { Engine.reset(); refresh(); };
 
-    exportBtn.onclick = () => {
-      const blob = new Blob([JSON.stringify(Engine.exportBuild(), null, 2)], {type:"application/json"});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'build.json';
-      a.click();
-    };
-    importBtn.onclick = () => importFile.click();
-    importFile.onchange = async () => {
-      const file = importFile.files[0];
-      if (!file) return;
-      const txt = await file.text();
-      try {
-        Engine.importBuild(JSON.parse(txt));
-        totalPointsInput.value = Engine.state.pointsMax;
-        refresh();
-      } catch(e) { alert('JSON inválido'); }
-    };
+    
 
     // Helpers de posição
     function toLocal(clientX, clientY){
@@ -134,6 +117,42 @@
         }
       }
     }
+
+    // Atualiza TODAS as arestas (usado quando setamos um layout inteiro):
+function redrawAllLinks(){
+  for (const path of gLinks.childNodes){
+    const src = path.getAttribute('data-src');
+    const dst = path.getAttribute('data-dst');
+    const s = positions.get(src), t = positions.get(dst);
+    if (s && t) path.setAttribute('d', cubicV(s.x, s.y, t.x, t.y));
+  }
+}
+
+// Exponho helpers de posições para o persist.js:
+window.Engine = window.Engine || Engine;
+
+Engine.getPositions = () => {
+  const out = {};
+  for (const [id, pos] of positions) out[id] = { x: pos.x, y: pos.y };
+  return out;
+};
+
+Engine.setPositions = (plain) => {
+  if (!plain) return;
+  for (const [id, pos] of Object.entries(plain)) {
+    if (pos && typeof pos.x === 'number' && typeof pos.y === 'number') {
+      positions.set(id, { x: pos.x, y: pos.y });
+      const g = nodeEls.get(id);
+      if (g) g.setAttribute('transform', `translate(${pos.x},${pos.y})`);
+    }
+  }
+  redrawAllLinks();
+  Engine.hasAppliedPositions = true; // o persist usa isso para não repor layout duas vezes
+};
+
+// Permite ao persist.js pedir um re-render:
+Engine.requestRender = () => refresh();
+
 
     // Tooltip
     const tooltip = document.createElement('div');
@@ -288,21 +307,40 @@
       spentEl.textContent = Engine.state.pointsSpent;
       remainingEl.textContent = Math.max(0, Engine.state.pointsMax - Engine.state.pointsSpent);
 
-      for (const node of data.nodes) {
-        const el = nodeEls.get(node.id);
-        if (!el) continue;
-        const circle = el.querySelector('circle');
-        const isActive = Engine.state.active.has(node.id);
-        const can = Engine.canBuy(node.id).ok;
-        if (isActive) circle.setAttribute('stroke','var(--active)');
-        else if (can) circle.setAttribute('stroke','var(--available)');
-        else circle.setAttribute('stroke','var(--locked)');
-      }
+    // Nós: além do stroke, ligamos classes para controlar opacidade
+    for (const node of data.nodes) {
+      const el = nodeEls.get(node.id);
+      if (!el) continue;
 
-      for (const path of gLinks.childNodes) {
-        const dst = path.getAttribute('data-dst');
-        path.setAttribute('class', 'link' + (Engine.canBuy(dst).ok ? ' available':'') );
-      }
+      const circle = el.querySelector('circle');
+      const isActive = Engine.state.active.has(node.id);
+      const can = Engine.canBuy(node.id).ok;
+
+      // stroke (contorno) como antes
+      if (isActive) circle.setAttribute('stroke', 'var(--active)');
+      else if (can) circle.setAttribute('stroke', 'var(--available)');
+      else circle.setAttribute('stroke', 'var(--locked)');
+
+      // classes novas para CSS controlar visibilidade
+      el.classList.toggle('active', isActive);
+      el.classList.toggle('available', !isActive && can);
+      el.classList.toggle('unavailable', !isActive && !can);
+    }
+
+    // Ligações: marcamos também as travadas
+ for (const path of gLinks.childNodes) {
+  const dst = path.getAttribute('data-dst');
+  const isDstActive = Engine.state.active.has(dst);
+  const can = Engine.canBuy(dst).ok;
+
+  let klass = 'link ';
+  if (isDstActive)      klass += 'active';
+  else if (can)         klass += 'available';
+  else                  klass += 'locked';
+
+  path.setAttribute('class', klass);
+}
+
 
       const st = Engine.nenStage();
       rules.innerHTML = `

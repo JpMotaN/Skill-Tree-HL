@@ -139,6 +139,21 @@ const Engine = (() => {
     }
   }
 
+  // ---- Serialização para persist.js ----
+function serialize() {
+  // Podemos simplesmente reutilizar o exportBuild existente
+  return exportBuild();
+}
+
+function deserialize(payload) {
+  if (!payload) return;
+  // Reutiliza a lógica robusta de import (reseta, aplica pointsMax e compra nós)
+  importBuild(payload);
+  // Garante stats coerentes
+  recomputeStats();
+}
+
+
   // ---- PN dos Princípios de Nen (para Estágio) ----
   function nenPointsFundamentais(){
     const PRINCIPLES = new Set(["Ten","Zetsu","Ren","Hatsu","Fundamental"]);
@@ -159,8 +174,10 @@ const Engine = (() => {
     return { name:"Iniciante", pn }; // 0–9
   }
 
-  return {
-    state, init, setPointsMax, reset, canBuy, buy, canRefund, refund, recomputeStats,
-    exportBuild, importBuild, nenPointsFundamentais, nenStage
-  };
+return {
+  state, init, setPointsMax, reset, canBuy, buy, canRefund, refund, recomputeStats,
+  exportBuild, importBuild, nenPointsFundamentais, nenStage,
+  serialize, deserialize
+};
+
 })();
