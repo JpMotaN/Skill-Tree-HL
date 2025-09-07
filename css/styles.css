@@ -260,3 +260,8 @@ html, body{
 
 /* links também “somem” quando o destino não é comprável */
 .link.locked { opacity:.25; stroke-dasharray: 3 6; }
+/* aresta para destino já comprado: visível e linha contínua */
+.link.active{
+  opacity: .95;
+  stroke-dasharray: none;
+}

@@ -309,11 +309,18 @@
     }
 
     // Ligações: marcamos também as travadas
-    for (const path of gLinks.childNodes) {
-      const dst = path.getAttribute('data-dst');
-      const can = Engine.canBuy(dst).ok;
-      path.setAttribute('class', 'link ' + (can ? 'available' : 'locked'));
-    }
+ for (const path of gLinks.childNodes) {
+  const dst = path.getAttribute('data-dst');
+  const isDstActive = Engine.state.active.has(dst);
+  const can = Engine.canBuy(dst).ok;
+
+  let klass = 'link ';
+  if (isDstActive)      klass += 'active';
+  else if (can)         klass += 'available';
+  else                  klass += 'locked';
+
+  path.setAttribute('class', klass);
+}
 
 
       const st = Engine.nenStage();
