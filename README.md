@@ -1,4 +1,4 @@
-# Skill Tree HL ~ By Jotape estático
+# Skill Tree HL ~ By Jotape
 Projeto mínimo para testar uma árvore de habilidades no navegador **sem build step**.
 
 ## Como Usar
