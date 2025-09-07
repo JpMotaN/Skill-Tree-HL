@@ -6,7 +6,7 @@ Projeto mínimo para testar uma árvore de habilidades no navegador **sem build 
 2. Comece comprando os princípios basicos (Ren, Ten, Zetsu e Hatsu);
 3. As habilidades que você pode comprar ficarão verdes, assim como princípíos avançados;
 4. Confira os requisitos de cada item passando o mouse por cima;
-5. Confira e as tecnicas adiquiridas a esquerda.
+5. Confira e as tecnicas adiquiridas à esquerda.
 
 ## Estrutura
 ```
