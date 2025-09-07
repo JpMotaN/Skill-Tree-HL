@@ -2,7 +2,11 @@
 Projeto mínimo para testar uma árvore de habilidades no navegador **sem build step**.
 
 ## Como Usar
-1. Monto em breve a descrição kk
+1. Distribua sua quantidade de pontos;
+2. Comece comprando os princípios basicos (Ren, Ten, Zetsu e Hatsu);
+3. As habilidades que você pode comprar ficarão verdes, assim como princípíos avançados;
+4. Confira os requisitos de cada item passando o mouse por cima;
+5. Confira e as tecnicas adiquiridas a esquerda.
 
 ## Estrutura
 ```
@@ -25,7 +29,7 @@ skilltree-site/
   - `id`, `label`, `tier`, `cost`, `tags[]`, `requires[]`, `effects[]` (`{ stat, op: "add|mul", value }`).
 - **Import/Export de build**: botões no topo.
 
-## Próximos passos (sugestões)
+## Próximos passos (A princípio)
 - Minimapa, teclas de atalho, desfazer/refazer.
 - Efeitos com ordem determinística (add → mul → caps).
 - Suporte a **exclusões** (A bloqueia B).
