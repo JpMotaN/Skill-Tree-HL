@@ -68,19 +68,175 @@ hr.sep{border:0;border-top:1px solid #1a2236;margin:8px 0}
 .saved-builds button{ border-radius:8px; padding:6px 10px; }
 .saved-builds .danger{ background:#3b0f14; border:1px solid #7f1d1d; color:#fca5a5; }
 
-/* Faz o contêiner da árvore acompanhar a altura da página */
-.canvas-root{
-  height: auto;                    
-  min-height: calc(100vh - 80px);  
-}
-.canvas-root svg{
-  width: 100%;
+.saved-builds{ right:16px; left:auto; bottom:16px; }
+/* o canvas pode crescer e não deve cortar nada */
+.app-main { align-items: stretch; }
+.canvas-root { overflow: visible; }
+.canvas-root svg { display: block; width: 100%; }
+
+
+/* ===== Página sem rolagem global ===== */
+html, body{
   height: 100%;
+  overflow: hidden;      /* só a coluna esquerda rola */
+}
+
+/* ===== Área do app: ocupa a viewport - header (64px é o seu header atual) ===== */
+.app-main{
+  display: grid;
+  grid-template-columns: 340px 1fr;  /* coluna fixa + resto */
+  height: calc(100vh - 64px);        /* era min-height -> agora altura exata */
+  overflow: hidden;                  /* nada vaza para criar “faixa” */
+}
+
+/* ===== Sidebar com largura travada e scroll próprio ===== */
+.sidebar{
+  border-right: 1px solid #181e2c;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #090e1a;
+
+  width: 340px;                      /* fixa mesmo se o conteúdo crescer */
+  min-width: 340px;
+  max-width: 340px;
+  height: 100%;
+  overflow: auto;                    /* rolagem só aqui */
+  box-sizing: border-box;
+}
+
+/* ===== Canvas ocupa todo o resto, sem sobras à direita nem corte embaixo ===== */
+.canvas-wrap{
+  position: relative;
+  overflow: hidden;
+  height: 100%;                      /* acompanha a altura do .app-main */
+  padding: 0;                        /* garante zero “respiro” lateral */
+  box-sizing: border-box;
+}
+
+/* Se o seu SVG/contêiner é #graph, ele precisa preencher 100% da area */
+#graph{
+  width: 100%;
+  height: 100%;                      /* em vez de calc(100vh - 64px) */
+  background: radial-gradient(1100px 700px at 45% 20%, #12182a 0%, #0b0d12 70%);
+  user-select: none;
   display: block;
 }
 
-.app-main { align-items: stretch; }
+/* (Limpeza) você tem declarações duplicadas; pode remover estas pois não usa .canvas-root: */
 .canvas-root { overflow: visible; }
+.canvas-root svg { display: block; width: 100%; }
 
-.saved-builds{ right:16px; left:auto; bottom:16px; }
+/* Painel de saves já ok; só remova a LINHA DUPLICADA repetindo .saved-builds */
+/* —— 1) desliga scroll global —— */
+html, body{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;                /* só a sidebar rola */
+}
 
+/* —— 2) app ocupa a viewport menos o header —— */
+:root{ --header-h: 64px; }         /* ajuste se seu header mudar */
+.app-main{
+  display: grid;
+  grid-template-columns: 340px 1fr;/* sidebar fixa + resto */
+  height: calc(100vh - var(--header-h));
+  width: 100%;
+  overflow: hidden;                /* nada “vaza” p/ criar faixa */
+  align-items: stretch;
+}
+
+/* —— 3) sidebar de largura fixa + scroll próprio —— */
+.sidebar{
+  width: 340px;
+  min-width: 340px;
+  max-width: 340px;
+  height: 100%;
+  overflow: auto;                  /* rolagem só aqui */
+  box-sizing: border-box;          /* evita “engordar” por padding/borda */
+}
+
+/* —— 4) canvas ocupa 100% do resto —— */
+.canvas-wrap{
+  position: relative;
+  height: 100%;
+  min-width: 0;                    /* importantíssimo p/ grid/flex */
+  overflow: hidden;                /* nada cria scroll aqui */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* —— 5) o SVG preenche a área (sem calc duplicado) —— */
+#graph{
+  width: 100%;
+  height: 100% !important;         /* mata height antigos tipo calc(100vh-64px) */
+  display: block;
+}
+
+/* LIMPEZA: pode remover regras antigas que citam .canvas-root,
+   min-height em .app-main, ou height duplicado em #graph */
+:root{ --sidebar-w: 340px; }           /* largura padrão da sidebar */
+
+.app-main{
+  display: grid;
+  grid-template-columns: auto 1fr;     /* 1ª coluna acompanha a largura da sidebar */
+  height: calc(100vh - 64px);
+  width: 100%;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+/* sidebar usa a variável; anima ao colapsar */
+.sidebar{
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  transition: width .25s ease, min-width .25s ease, max-width .25s ease, padding .25s ease, border-right .25s ease;
+}
+
+/* canvas ocupa todo o resto */
+.canvas-wrap{ height:100%; min-width:0; overflow:hidden; padding:0; }
+#graph{ width:100%; height:100% !important; display:block; }
+
+/* estado colapsado: sidebar some (0px) e some o padding/borda */
+.app-main.sidebar-collapsed{ --sidebar-w: 0px; }
+.app-main.sidebar-collapsed .sidebar{
+  padding: 0;
+  border-right: 0;
+}
+/* largura padrão da sidebar */
+:root{ --sidebar-w: 340px; }
+
+/* AQUI é o pulo do gato: a 1ª coluna usa a variável */
+.app-main{
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr; /* <- era 340px 1fr ou auto 1fr */
+  height: calc(100vh - 64px);
+  width: 100%;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+/* sidebar segue a variável e transiciona */
+.sidebar{
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  transition: width .25s, min-width .25s, max-width .25s, padding .25s, border-right .25s;
+}
+
+/* estado COLAPSADO: zera a coluna e esconde o conteúdo visualmente */
+.app-main.sidebar-collapsed{ --sidebar-w: 0px; }
+.app-main.sidebar-collapsed .sidebar{
+  padding: 0;
+  border-right: 0;
+  overflow: hidden;        /* evita scrollbar aparecendo */
+  pointer-events: none;    /* não captura cliques quando oculta */
+}

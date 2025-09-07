@@ -1,52 +1,78 @@
-// resize-canvas.js — altura do canvas = max(altura da viewport útil, altura da coluna esquerda)
-// mede explicitamente #leftColumn para evitar loops de “scroll infinito”.
+// resize-canvas.js — canvas ocupa 100% da área útil (viewport - header).
+// Página sem scroll; scroll só no #leftColumn. Nada de faixa à direita.
 
 (function(){
-  function fitCanvasHeight(){
-    const root    = document.querySelector('.canvas-root');     // contêiner do canvas
-    const svg     = root ? root.querySelector('svg') : null;    // <svg> da árvore
-    const header  = document.querySelector('.app-header');
-    const leftCol = document.getElementById('leftColumn');      // <- coluna esquerda
-    if (!root || !svg) return;
+  const SEL = {
+    header: '.app-header',
+    main: '.app-main',
+    root: '.canvas-root',
+    svg:  'svg#skillSvg, .canvas-root > svg, .canvas-root svg',
+  };
 
-    const headerH = header ? header.getBoundingClientRect().height : 0;
+  const raf = (fn)=>window.requestAnimationFrame(fn);
 
-    // Altura útil da viewport (sem o header)
-    const viewportUseful = Math.max(0, window.innerHeight - headerH);
-
-    // Altura REAL do conteúdo da esquerda (scrollHeight ignora o clipping do overflow)
-    const leftContentH = leftCol ? leftCol.scrollHeight : 0;
-
-    // alvo = maior entre viewport útil e coluna esquerda
-    const target = Math.max(viewportUseful, leftContentH) + 24; // +respiro
-
-    // aplica no contêiner e no svg (para Safari/Firefox respeitarem a área clicável)
-    root.style.minHeight = `${target}px`;
-    root.style.height    = `${target}px`;
-    svg.style.height     = `${target}px`;
-    svg.setAttribute('height', String(target));
-    // mantemos a largura 100% via CSS; viewBox não precisa mudar
+  function getEls(){
+    const header = document.querySelector(SEL.header);
+    const main   = document.querySelector(SEL.main);
+    const root   = document.querySelector(SEL.root);
+    const svg    = root ? root.querySelector(SEL.svg) : null;
+    return {header, main, root, svg};
   }
 
-  function installObservers(){
-    const leftCol = document.getElementById('leftColumn');
-    const header  = document.querySelector('.app-header');
-
-    const ro = new ResizeObserver(fitCanvasHeight);
-    if (leftCol) ro.observe(leftCol);
-    if (header)  ro.observe(header);
-
-    // quando algo no conteúdo da esquerda crescer (ex.: técnicas renderizadas)
-    // o ResizeObserver dispara; estes eventos são apenas redundância segura:
-    window.addEventListener('resize', fitCanvasHeight);
-    document.addEventListener('visibilitychange', fitCanvasHeight);
+  function setHeaderVar(header){
+    const h = header ? Math.round(header.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    return h;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    installObservers();
-    fitCanvasHeight();
-    // revalida depois de possíveis animações/render assíncronos
-    setTimeout(fitCanvasHeight, 50);
-    setTimeout(fitCanvasHeight, 250);
-  });
+  function fit(){
+    const {header, main, root, svg} = getEls();
+    if (!main || !root || !svg) return;
+
+    const headerH = setHeaderVar(header);
+    const targetH = Math.max(0, Math.round(window.innerHeight - headerH));
+
+    // altura exata
+    root.style.height = `${targetH}px`;
+    svg.style.height  = `${targetH}px`;
+    svg.setAttribute('height', String(targetH));
+
+    // viewBox com altura exata (evita corte e faixas)
+    const rootW = Math.max(1, Math.round(root.getBoundingClientRect().width || svg.clientWidth || 1200));
+    const vbAttr = svg.getAttribute('viewBox');
+    let vbW = rootW;
+    if (vbAttr){
+      const p = vbAttr.split(/\s+/).map(Number);
+      if (p.length === 4 && !isNaN(p[2])) vbW = Math.max(1, p[2]);
+    }
+    svg.setAttribute('viewBox', `0 0 ${vbW} ${targetH}`);
+
+    // retângulo de fundo transparente cobrindo tudo (garante área clicável)
+    let bg = svg.querySelector('#autosize-bg');
+    if (!bg){
+      bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      bg.setAttribute('id','autosize-bg');
+      bg.setAttribute('fill','transparent');
+      bg.setAttribute('pointer-events','none');
+      svg.insertBefore(bg, svg.firstChild);
+    }
+    bg.setAttribute('x','0'); bg.setAttribute('y','0');
+    bg.setAttribute('width',  String(Math.max(vbW, rootW)));
+    bg.setAttribute('height', String(targetH));
+  }
+
+  function boot(){
+    const {header, main} = getEls();
+    const ro = new ResizeObserver(()=>raf(fit));
+    if (header) ro.observe(header);
+    if (main)   ro.observe(main);
+    window.addEventListener('resize', ()=>raf(fit));
+    document.addEventListener('visibilitychange', ()=>raf(fit));
+    document.addEventListener('DOMContentLoaded', ()=>raf(fit));
+    raf(fit);
+    setTimeout(fit, 50);
+    setTimeout(fit, 250);
+  }
+
+  boot();
 })();
