@@ -9,6 +9,7 @@
       "type": "principle",
       "label": "Ten",
       "cost": 0,
+      "icon": "ten.png",
       "tags": ["Fundamental", "Princípio", "Ten"],
       "requires": [],
       "desc": "Manter a aura circulando como uma segunda pele, reduzindo a perda de aura e protegendo contra golpes básicos de Nen. Sensação de fluido viscoso e calor constante.",
@@ -248,7 +249,7 @@
     { "id": "en-sensitivo", "type": "skill", "label": "Sensitivo", "cost": 1, "tags": ["En"], "requires": ["en"], "notes": "Ao ser alvo de um ataque, você pode optar por ser atingido para saber a direção exata; vantagem e +10 em Percepção para encontrar o atacante." },
     { "id": "en-aprimorar-sentidos", "type": "skill", "label": "Aprimorar Sentidos", "cost": 1, "tags": ["En"], "requires": ["en"], "notes": "+2 no Teste de Espírito (Percepção) da ativação do En. Pode ser adquirida várias vezes (+2 por compra).", "reqNote": "Empilhamento não é checado automaticamente." },
     { "id": "en-integracao-habilidade", "type": "skill", "label": "Integração de Habilidade", "cost": 2, "tags": ["En"], "requires": ["en"], "notes": "Suas habilidades em área recebem o mesmo alcance do En (máx. 30 m para técnicas que causem dano diretamente). Custa 1 PA extra na técnica." },
-    { "id": "en-expansao-aura", "type": "skill", "label": "Expansão de Aura", "cost": 2, "tags": ["En"], "requires": ["en"], "notes": "Área do En aumenta para 30 m. Pode ser adquirida de novo para dobrar o alcance anterior (+1 PN de custo por compra).", "reqNote": "Custo incremental/empilhamento não checado automaticamente." },
+    { "id": "en-expansao-aura", "type": "skill", "label": "Expansão de Aura", "cost": 2, "stackable": true, "tags": ["En"], "requires": ["en"], "notes": "Área do En aumenta para 30 m. Pode ser adquirida de novo para dobrar o alcance anterior (+1 PN de custo por compra).", "reqNote": "Custo incremental/empilhamento não checado automaticamente." },
 
     {
       "id": "ryu",
