@@ -265,3 +265,23 @@ html, body{
   opacity: .95;
   stroke-dasharray: none;
 }
+.node image.node-icon{
+  pointer-events: none;
+  opacity: .95;
+  filter: saturate(92%);
+}
+.node.available image.node-icon{ opacity: .9; }
+.node.unavailable image.node-icon{
+  opacity: .28;
+  filter: saturate(55%);
+}
+.node .node-icon { opacity: .95; }
+.node.unavailable .node-icon { opacity: .25; filter: grayscale(60%); }
+
+.link.locked    { opacity: .25; stroke-dasharray: 4 4; }
+.link.available { opacity: .9; }
+
+.node .node-icon { opacity: .7; transition: opacity .2s, filter .2s; }
+.node.unavailable .node-icon { opacity: .12; filter: grayscale(100%); }
+.node.available   .node-icon { opacity: .6;  filter: grayscale(40%);  }
+.node.active      .node-icon { opacity: 1;   filter: none;           }
