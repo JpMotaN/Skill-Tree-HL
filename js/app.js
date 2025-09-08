@@ -18,8 +18,33 @@
     const importBtn = document.getElementById('importBtn');
     const importFile = document.getElementById('importFile');
 
+    // Carrega dados
     const data = await fetch('data/skills.json').then((r) => r.json());
+
+    // === MOVER reqStage => _reqStage (Engine não faz gate interno) ===
+    for (const n of data.nodes) {
+      if (n.reqStage) {
+        n._reqStage = n.reqStage;
+        delete n.reqStage;
+      }
+    }
+
+    // Inicializa engine sem reqStage interno
     Engine.init(data);
+
+    // depois de Engine.init(data)
+function stageFromPN(pn) {
+  if (pn >= 31) return 'Mestre';
+  if (pn >= 10) return 'Perito';
+  return 'Iniciante';
+}
+
+// PN passa a ser simplesmente os pontos gastos totais
+Engine.nenStage = function () {
+  const pn = Engine.state.pointsSpent; // conta tudo que foi gasto
+  return { pn, name: stageFromPN(pn) };
+};
+
 
     // layout padrão (se existir)
     let defaultLayout = null;
@@ -55,6 +80,33 @@
 
     const nodesById = Object.fromEntries(data.nodes.map((n) => [n.id, n]));
 
+    // === Gate de estágio aplicado no app.js ===
+    const stageOrder = { Iniciante: 0, Perito: 1, Mestre: 2 };
+
+    function hasRequiredStage(node) {
+      if (!node || !node._reqStage) return true;
+      const have = Engine.nenStage().name;
+      return (stageOrder[have] ?? 0) >= (stageOrder[node._reqStage] ?? 0);
+    }
+
+    const baseCanBuy = Engine.canBuy.bind(Engine);
+    Engine.canBuy = function (id) {
+      const res = baseCanBuy(id);
+      if (!res.ok) return res;
+      const node = nodesById[id];
+      if (!hasRequiredStage(node)) {
+        return { ok: false, reason: `Requer estágio ${node._reqStage}` };
+      }
+      return res;
+    };
+
+    const baseBuy = Engine.buy.bind(Engine);
+    Engine.buy = function (id) {
+      const gate = Engine.canBuy(id);
+      if (!gate.ok) return gate;
+      return baseBuy(id);
+    };
+
     // ===== ÍCONES (SIMPLES) =====
     const ICON_DIR = 'img/icons/'; // sempre esta pasta
 
@@ -68,32 +120,48 @@
       return ICON_DIR + explicit;
     }
 
-    function addIcon(g, circle, node) {
+    // ===== ÍCONES recortados no círculo =====
+    function addIcon(g, circle, node, svgRoot = graph) {
       const href = iconPath(node);
       if (!href) return;
 
       const r = parseFloat(circle.getAttribute('r')) || 20;
 
+      // garante um <defs> no <svg id="graph">
+      let defs = svgRoot.querySelector('defs');
+      if (!defs) {
+        defs = createSVG('defs', {});
+        svgRoot.insertBefore(defs, svgRoot.firstChild);
+      }
+
+      // clipPath único por nó
+      const clipId = `icon-clip-${node.id}`;
+      let clip = defs.querySelector('#' + clipId);
+      if (!clip) {
+        clip = createSVG('clipPath', { id: clipId });
+        clip.appendChild(createSVG('circle', { cx: 0, cy: 0, r }));
+        defs.appendChild(clip);
+      } else {
+        const c = clip.querySelector('circle');
+        if (c) c.setAttribute('r', r);
+      }
+
+      // imagem do ícone, cortada pelo círculo
       const img = createSVG('image', {
         x: -r, y: -r, width: r * 2, height: r * 2,
+        preserveAspectRatio: 'xMidYMid slice',
+        'clip-path': `url(#${clipId})`,
         class: 'node-icon',
-        style: 'pointer-events:none; image-rendering:auto;'
+        style: 'pointer-events:none'
       });
 
-      // define href (compatibilidade)
+      // href (com compat xlink)
       img.setAttribute('href', href);
       img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', href);
 
-      img.addEventListener('error', () => {
-        console.warn('⚠️  Falha ao carregar ícone:', href, 'para', node.label || node.id);
-        img.remove();
-      });
-      img.addEventListener('load', () => {
-        // dica útil no dev:
-        // console.debug('✓ ícone ok:', href, '→', node.label || node.id);
-      });
+      img.addEventListener('error', () => img.remove());
 
-      // Coloca a imagem ANTES do círculo para o contorno do círculo ficar por cima.
+      // coloca a imagem **antes** do círculo -> borda fica por cima
       g.insertBefore(img, circle);
     }
     // ===== /ÍCONES =====
@@ -232,8 +300,8 @@
       const circle = createSVG('circle', { r: 20, stroke: 'var(--locked)', fill: 'transparent'});
       g.appendChild(circle);
 
-      // ÍCONE (PNG transparente, sem clip)
-      addIcon(g, circle, node);
+      // ÍCONE (PNG transparente, com clip dentro do círculo)
+      addIcon(g, circle, node, graph);
 
       const label = createSVG('text', { x: 0, y: 34, 'text-anchor': 'middle' });
       label.textContent = node.label;
@@ -313,7 +381,7 @@
       const techBlock = SHOW_TECH && effectsList ? `<hr class="sep"/><p><b>Efeitos (técnicos):</b><br/>${effectsList}</p>` : '';
 
       const tags = (node.tags || []).map((t) => `<span class="tag">${t}</span>`).join('');
-      const stageBadge = node.reqStage ? `<span class="tag">Requer: ${node.reqStage}</span>` : '';
+      const stageBadge = node._reqStage ? `<span class="tag">Requer: ${node._reqStage}</span>` : '';
       const summary = node.notes ? `<p><b>Resumo:</b> ${node.notes}</p>` : '';
 
       const desc = node.type === 'principle' && node.desc ? `<p>${node.desc}</p>` : '';
