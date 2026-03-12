@@ -99,20 +99,111 @@
       ]
     },
 
-    { "id": "ten-defesa-aura", "type": "skill", "label": "Defesa de Aura", "cost": 3, "tags": ["Ten"], "requires": ["ten"], "notes": "Você reduz todo dano sem aura pela metade." },
-    { "id": "ten-defesa-elevada", "type": "skill", "label": "Defesa Elevada", "cost": 6, "tags": ["Ten"], "requires": ["ten-defesa-aura"], "notes": "Antes de reduzir pela metade, reduza 15 de dano." },
-    { "id": "ten-mov-rapida", "type": "skill", "label": "Movimentação Rápida", "cost": 6, "tags": ["Ten"], "requires": ["ten"], "reqStage": "Perito", "notes": "Fora de combate: dobra deslocamento; pode usar disparada sem exaustão. 1 PA para ativar +1 PA a cada 5 min." },
+    {
+      "id": "ten-defesa-aura",
+      "type": "skill",
+      "label": "Defesa de Aura",
+      "cost": 3,
+      "tags": ["Ten"],
+      "requires": ["ten"],
+      "notes": "Você reduz todo dano sem aura pela metade."
+    },
+    {
+      "id": "ten-defesa-elevada",
+      "type": "skill",
+      "label": "Defesa Elevada",
+      "cost": 6,
+      "tags": ["Ten"],
+      "requires": ["ten-defesa-aura"],
+      "notes": "Antes de reduzir pela metade, reduza 15 de dano."
+    },
+    {
+      "id": "ten-mov-rapida",
+      "type": "skill",
+      "label": "Movimentação Rápida",
+      "cost": 6,
+      "tags": ["Ten"],
+      "requires": ["ten"],
+      "reqStage": "Perito",
+      "notes": "Fora de combate: dobra deslocamento; pode usar disparada sem exaustão. 1 PA para ativar +1 PA a cada 5 min."
+    },
 
-    { "id": "zetsu-supressao", "type": "skill", "label": "Supressão de Aura", "cost": 3, "tags": ["Zetsu"], "requires": ["zetsu"], "notes": "Enquanto em Zetsu, recebe +5 em Furtividade." },
-    { "id": "zetsu-recuperacao", "type": "skill", "label": "Recuperação Acelerada", "cost": 6, "tags": ["Zetsu"], "requires": ["zetsu"], "notes": "Enquanto em Zetsu, descansos curtos/longos levam metade do tempo." },
-    { "id": "zetsu-mestre", "type": "skill", "label": "Mestre de Zetsu", "cost": 10, "tags": ["Zetsu"], "requires": ["zetsu-supressao"], "reqStage": "Mestre", "notes": "Ganha proficiência em Furtividade; se já tiver, ganha maestria." },
+    {
+      "id": "zetsu-supressao",
+      "type": "skill",
+      "label": "Supressão de Aura",
+      "cost": 3,
+      "tags": ["Zetsu"],
+      "requires": ["zetsu"],
+      "notes": "Enquanto em Zetsu, recebe +5 em Furtividade."
+    },
+    {
+      "id": "zetsu-recuperacao",
+      "type": "skill",
+      "label": "Recuperação Acelerada",
+      "cost": 6,
+      "tags": ["Zetsu"],
+      "requires": ["zetsu"],
+      "notes": "Enquanto em Zetsu, descansos curtos/longos levam metade do tempo."
+    },
+    {
+      "id": "zetsu-mestre",
+      "type": "skill",
+      "label": "Mestre de Zetsu",
+      "cost": 10,
+      "tags": ["Zetsu"],
+      "requires": ["zetsu-supressao"],
+      "reqStage": "Mestre",
+      "notes": "Ganha proficiência em Furtividade; se já tiver, ganha maestria."
+    },
 
-    { "id": "ren-explosao-ofensiva", "type": "skill", "label": "Explosão Ofensiva", "cost": 3, "tags": ["Ren"], "requires": ["ren"], "notes": "Adicione até um número de d4 no próximo ataque ou dados de dano de técnica igual ao seu bônus de proficiência. Custa 1 PA por dado. Pode ser usado em cura gastando 2 PA por dado." },
-    { "id": "ren-explosao-defensiva", "type": "skill", "label": "Explosão Defensiva", "cost": 3, "tags": ["Ren"], "requires": ["ren"], "notes": "Gaste 1 PA para reduzir 1d4 de dano sofrido OU adicionar 2 dados de redução na próxima técnica (limite = aura disponível). Não funciona com Transferência Rápida." },
-    { "id": "ren-ultimo-recurso", "type": "skill", "label": "Último Recurso", "cost": 6, "tags": ["Ren"], "requires": ["ren-explosao-defensiva"], "reqStage": "Perito", "notes": "Até 3×/descanso longo: ao sofrer crítico de ataque comum, trate como dano normal. Contra crítico de técnica, gaste 6 PA para tratar como dano normal." },
+    {
+      "id": "ren-explosao-ofensiva",
+      "type": "skill",
+      "label": "Explosão Ofensiva",
+      "cost": 3,
+      "tags": ["Ren"],
+      "requires": ["ren"],
+      "notes": "Adicione até um número de d4 no próximo ataque ou dados de dano de técnica igual ao seu bônus de proficiência. Custa 1 PA por dado. Pode ser usado em cura gastando 2 PA por dado."
+    },
+    {
+      "id": "ren-explosao-defensiva",
+      "type": "skill",
+      "label": "Explosão Defensiva",
+      "cost": 3,
+      "tags": ["Ren"],
+      "requires": ["ren"],
+      "notes": "Gaste 1 PA para reduzir 1d4 de dano sofrido OU adicionar 2 dados de redução na próxima técnica (limite = aura disponível). Não funciona com Transferência Rápida."
+    },
+    {
+      "id": "ren-ultimo-recurso",
+      "type": "skill",
+      "label": "Último Recurso",
+      "cost": 6,
+      "tags": ["Ren"],
+      "requires": ["ren"],
+      "reqStage": "Perito",
+      "notes": "Até 3×/descanso longo: ao sofrer crítico de ataque comum, trate como dano normal. Contra crítico de técnica, gaste 6 PA para tratar como dano normal."
+    },
 
-    { "id": "hatsu-aura-assassina", "type": "skill", "label": "Aura Assassina", "cost": 3, "tags": ["Hatsu"], "requires": ["hatsu"], "notes": "Ação de poder: ataque contra alvo sem aura. Consome 2 PA e remove 4 PVE do alvo." },
-    { "id": "hatsu-despertar-aura", "type": "skill", "label": "Despertar Aura", "cost": 6, "tags": ["Hatsu"], "requires": ["hatsu"], "notes": "Toque: envia aura para abrir nós de aura (Teste Espírito (Nen) CD 16). Falha: alvo recebe dobro do dano de Aura Assassina." },
+    {
+      "id": "hatsu-aura-assassina",
+      "type": "skill",
+      "label": "Aura Assassina",
+      "cost": 3,
+      "tags": ["Hatsu"],
+      "requires": ["hatsu"],
+      "notes": "Ação de poder: ataque contra alvo sem aura. Consome 2 PA e remove 4 PVE do alvo."
+    },
+    {
+      "id": "hatsu-despertar-aura",
+      "type": "skill",
+      "label": "Despertar Aura",
+      "cost": 6,
+      "tags": ["Hatsu"],
+      "requires": ["hatsu"],
+      "notes": "Toque: envia aura para abrir nós de aura (Teste Espírito (Nen) CD 16). Falha: alvo recebe dobro do dano de Aura Assassina."
+    },
     {
       "id": "hatsu-habilidade-especial",
       "type": "skill",
@@ -137,19 +228,110 @@
       "desc": "Concentração da aura em parte específica do corpo para potencializá-la (uso comum: olhos para ver aura/efeitos ocultos).",
       "characteristic": "—",
       "techniques": [
-        { "id": "gyo-detectar-aura", "name": "Detectar Aura", "pa_cost": "2 PA", "duration": "Até o início do próximo turno", "range": "Pessoal", "requisite": "Gyo, Especial", "text": "Detecta qualquer aura/efeito com condição 'Invisível' até 90 m com visão direta. Não consome ação." },
-        { "id": "gyo-salto-concentrado", "name": "Salto Concentrado", "pa_cost": "Especial", "duration": "Instantâneo", "range": "Pessoal", "requisite": "Gyo, Especial", "text": "Concentre aura nas pernas: 1 PA por cada 3 m de pulo. Não consome ação." },
-        { "id": "gyo-investida-focada", "name": "Investida Focada", "pa_cost": "Especial", "duration": "Até o fim do turno", "range": "Pessoal", "requisite": "Gyo, Especial", "text": "+3 m de deslocamento por 1 PA (máx +30 m). Não dobra com Disparada. Não consome ação." },
-        { "id": "gyo-sentidos-aprimorados", "name": "Sentidos Aprimorados", "pa_cost": "2 PA", "duration": "Até o fim do turno", "range": "Pessoal", "requisite": "Gyo, Ação Bônus", "text": "Ouvidos: +5 Percepção auditiva, sabe quando criatura se move (furtiva). Boca: voz projetada a 3 km." },
-        { "id": "gyo-foco-rapido", "name": "Gyo – Foco Rápido", "pa_cost": "4 PA", "duration": "Instantâneo", "range": "Especial", "requisite": "Gyo, Ação de Poder", "text": "Concentra 70-80% da aura em um membro. Salvaguarda de Constituição: falha → perde ação bônus até próximo turno. Dano: 4d10. Alcance varia por categoria." },
-        { "id": "gyo-golpe-devastador", "name": "Gyo – Golpe Devastador", "pa_cost": "6 PA", "duration": "Instantâneo", "range": "Especial", "requisite": "Gyo, Ação de Poder", "text": "Golpe com grande aura (margem crítica 19–20). Dano: 6d10. Alcance varia por categoria." },
-        { "id": "gyo-foco-destruidor", "name": "Gyo – Foco Destruidor", "pa_cost": "8 PA", "duration": "Instantâneo", "range": "Especial", "requisite": "Gyo – Foco Agressivo, Ação de Poder", "text": "Concentra aura em membro/arma. Empurra 6m (Salv. Força). Se bater obstáculo 1,5m+: 4d8 extra. Dano: 8d10." }
+        {
+          "id": "gyo-detectar-aura",
+          "name": "Detectar Aura",
+          "pa_cost": "2 PA",
+          "duration": "Até o início do próximo turno",
+          "range": "Pessoal",
+          "requisite": "Gyo, Especial",
+          "text": "Detecta qualquer aura/efeito com condição 'Invisível' até 90 m com visão direta. Não consome ação."
+        },
+        {
+          "id": "gyo-salto-concentrado",
+          "name": "Salto Concentrado",
+          "pa_cost": "Especial",
+          "duration": "Instantâneo",
+          "range": "Pessoal",
+          "requisite": "Gyo, Especial",
+          "text": "Concentre aura nas pernas: 1 PA por cada 3 m de pulo. Não consome ação."
+        },
+        {
+          "id": "gyo-investida-focada",
+          "name": "Investida Focada",
+          "pa_cost": "Especial",
+          "duration": "Até o fim do turno",
+          "range": "Pessoal",
+          "requisite": "Gyo, Especial",
+          "text": "+3 m de deslocamento por 1 PA (máx +30 m). Não dobra com Disparada. Não consome ação."
+        },
+        {
+          "id": "gyo-sentidos-aprimorados",
+          "name": "Sentidos Aprimorados",
+          "pa_cost": "2 PA",
+          "duration": "Até o fim do turno",
+          "range": "Pessoal",
+          "requisite": "Gyo, Ação Bônus",
+          "text": "Ouvidos: +5 Percepção auditiva, sabe quando criatura se move (furtiva). Boca: voz projetada a 3 km."
+        },
+        {
+          "id": "gyo-foco-rapido",
+          "name": "Gyo – Foco Rápido",
+          "pa_cost": "4 PA",
+          "duration": "Instantâneo",
+          "range": "Especial",
+          "requisite": "Gyo, Ação de Poder",
+          "text": "Concentra 70-30% da aura em um membro. Salvaguarda de Constituição: falha → perde ação bônus até próximo turno. Dano: 4d10. Alcance varia por categoria."
+        },
+        {
+          "id": "gyo-golpe-devastador",
+          "name": "Gyo – Golpe Devastador",
+          "pa_cost": "6 PA",
+          "duration": "Instantâneo",
+          "range": "Especial",
+          "requisite": "Gyo, Ação de Poder",
+          "text": "Golpe com grande aura (margem crítica 19–20). Dano: 6d10. Alcance varia por categoria."
+        },
+        {
+          "id": "gyo-foco-destruidor",
+          "name": "Gyo – Foco Destruidor",
+          "pa_cost": "8 PA",
+          "duration": "Instantâneo",
+          "range": "Especial",
+          "requisite": "Gyo – Foco Agressivo, Ação de Poder",
+          "text": "Concentra aura em membro/arma. Empurra 6m (Salv. Força). Se bater obstáculo 1,5m+: +4d8 extra. Dano: 8d10."
+        }
       ]
     },
-    { "id": "gyo-ponto-fraco", "type": "skill", "label": "Ponto Fraco", "cost": 3, "tags": ["Gyo"], "requires": ["gyo"], "notes": "Ação bônus + 2 PA: Teste Espírito (Nen) CD 10 + ND para encontrar ponto fraco ou 2 infos (ND, CR, PV, Resistências, Vulnerabilidades). 1× por criatura/descanso longo." },
-    { "id": "gyo-foco-agressivo", "type": "skill", "label": "Foco Agressivo", "cost": 6, "tags": ["Gyo"], "requires": ["gyo", "ren-explosao-ofensiva"], "reqStage": "Perito", "notes": "Seus ataques comuns recebem +1d4 de dano adicional." },
-    { "id": "gyo-foco-defensivo", "type": "skill", "label": "Foco Defensivo", "cost": 6, "tags": ["Gyo"], "requires": ["gyo", "ren-explosao-defensiva"], "reqStage": "Perito", "notes": "Cria 20 Pontos de Armadura (coexistem com PV temp, consumidos antes). Enquanto ativos: resistência a TODOS os tipos de dano. Restaura após 10 min sem usar aura. Não combina com Foco Agressivo." },
-    { "id": "gyo-analise-superior", "type": "skill", "label": "Análise Superior", "cost": 10, "tags": ["Gyo"], "requires": ["gyo-ponto-fraco"], "reqStage": "Mestre", "notes": "Com Detectar Aura ativo, Teste Espírito (Nen) CD = ND da criatura para saber exatamente o que a característica dela faz." },
+    {
+      "id": "gyo-ponto-fraco",
+      "type": "skill",
+      "label": "Ponto Fraco",
+      "cost": 3,
+      "tags": ["Gyo"],
+      "requires": ["gyo"],
+      "notes": "Ação bônus + 2 PA: Teste Espírito (Nen) CD 10 + ND para encontrar ponto fraco ou 2 infos (ND, CR, PV, Resistências, Vulnerabilidades). 1× por criatura/descanso longo."
+    },
+    {
+      "id": "gyo-foco-agressivo",
+      "type": "skill",
+      "label": "Foco Agressivo",
+      "cost": 6,
+      "tags": ["Gyo"],
+      "requires": ["gyo", "ren-explosao-ofensiva"],
+      "reqStage": "Perito",
+      "notes": "Seus ataques comuns recebem +1d4 de dano adicional."
+    },
+    {
+      "id": "gyo-foco-defensivo",
+      "type": "skill",
+      "label": "Foco Defensivo",
+      "cost": 6,
+      "tags": ["Gyo"],
+      "requires": ["gyo", "ren-explosao-defensiva"],
+      "reqStage": "Perito",
+      "notes": "Cria 20 Pontos de Armadura (coexistem com PV temp, consumidos antes). Enquanto ativos: resistência a TODOS os tipos de dano. Restaura após 10 min sem usar aura. Não combina com Foco Agressivo."
+    },
+    {
+      "id": "gyo-analise-superior",
+      "type": "skill",
+      "label": "Análise Superior",
+      "cost": 10,
+      "tags": ["Gyo"],
+      "requires": ["gyo-ponto-fraco"],
+      "reqStage": "Mestre",
+      "notes": "Com Detectar Aura ativo, Teste Espírito (Nen) CD = ND da criatura para saber exatamente o que a característica dela faz."
+    },
 
     {
       "id": "shu",
@@ -162,28 +344,78 @@
       "desc": "Aplicação avançada de Ten + Ren: envolver um objeto com sua aura tornando-o extensão do corpo (mais forte e resistente).",
       "characteristic": "—",
       "techniques": [
-        { "id": "shu-revestimento", "name": "Shu – Revestimento", "pa_cost": "3 PA", "duration": "Especial", "range": "Pessoal", "requisite": "Shu, Ação de Poder", "text": "Ao tocar objeto/estrutura Grande ou menor, dá 100 PV temporários, tornando-o indestrutível até o fim dos PV. Não funciona se item contiver aura de outra criatura." }
+        {
+          "id": "shu-revestimento",
+          "name": "Shu – Revestimento",
+          "pa_cost": "3 PA",
+          "duration": "Especial",
+          "range": "Pessoal",
+          "requisite": "Shu, Ação de Poder",
+          "text": "Ao tocar objeto/estrutura Grande ou menor, dá 100 PV temporários, tornando-o indestrutível até o fim dos PV. Não funciona se item contiver aura de outra criatura."
+        }
       ]
     },
-    { "id": "shu-envolver-objeto", "type": "skill", "label": "Envolver Objeto", "cost": 3, "tags": ["Shu"], "requires": ["shu"], "notes": "Envolva objeto com aura. Escolha 2 dos efeitos: (1) CR do objeto = sua; (2) Dobro de dano em estruturas; (3) Objeto recebe 50 Pontos de Armadura; (4) Dano base 1d10, pode arremessar no alcance da Emissão Treinada." },
-    { "id": "shu-escrita-nen", "type": "skill", "label": "Escrita de Nen", "cost": 3, "tags": ["Shu"], "requires": ["shu", "in-ocultacao"], "notes": "Coloque aura na ponta dos dedos para escrever em superfície. Pode usar com In para tornar invisível por até 2 horas." },
+    {
+      "id": "shu-envolver-objeto",
+      "type": "skill",
+      "label": "Envolver Objeto",
+      "cost": 3,
+      "tags": ["Shu"],
+      "requires": ["shu"],
+      "notes": "Envolva objeto com aura. Escolha 2 dos efeitos: (1) CR do objeto = sua; (2) Dobro de dano em estruturas; (3) Objeto recebe 50 Pontos de Armadura; (4) Dano base 1d10, pode arremessar no alcance da Emissão Treinada."
+    },
+    {
+      "id": "shu-escrita-nen",
+      "type": "skill",
+      "label": "Escrita de Nen",
+      "cost": 3,
+      "tags": ["Shu"],
+      "requires": ["shu", "in-ocultacao"],
+      "notes": "Coloque aura na ponta dos dedos para escrever em superfície. Pode usar com In para tornar invisível por até 2 horas."
+    },
 
     {
       "id": "in",
       "type": "principle",
       "label": "In",
-      "cost": 2,
+      "cost": 3,
       "tags": ["Avançado", "In"],
       "requires": ["zetsu"],
       "reqStage": "Perito",
       "desc": "Aplicação avançada de Zetsu: esconder completamente a presença de aura; principal uso é ocultar o próprio Hatsu.",
       "characteristic": "—",
       "techniques": [
-        { "id": "in-ocultacao-completa", "name": "In – Ocultação Completa", "pa_cost": "2 PA", "duration": "Até o início do próximo turno", "range": "Pessoal", "requisite": "In, Especial", "text": "Toda aura recebe condição 'Invisível'. Sem Detectar Aura: criatura não vê aura/constructos; ataques com aura pura = acerto automático; ataques com objetos de aura = vantagem; não sabe se é técnica ou ataque normal. Conta como Zetsu para Furtividade. Sem ação para ativar." }
+        {
+          "id": "in-ocultacao-completa",
+          "name": "In – Ocultação Completa",
+          "pa_cost": "2 PA",
+          "duration": "Até o início do próximo turno",
+          "range": "Pessoal",
+          "requisite": "In, Especial",
+          "text": "Toda aura recebe condição 'Invisível'. Sem Detectar Aura: criatura não vê aura/constructos; ataques com aura pura = acerto automático; ataques com objetos de aura = vantagem; não sabe se é técnica ou ataque normal. Conta como Zetsu para Furtividade. Sem ação para ativar."
+        }
       ]
     },
-    { "id": "in-ocultacao", "type": "skill", "label": "Ocultação", "cost": 6, "tags": ["In"], "requires": ["in"], "reqStage": "Perito", "notes": "Seus ataques (Comuns e de Técnica) recebem +3 de acerto." },
-    { "id": "in-mestre", "type": "skill", "label": "Mestre de In", "cost": 10, "tags": ["In"], "requires": ["in-ocultacao"], "reqStage": "Mestre", "notes": "Fora de combate, Ocultação Completa sempre ativa sem consumir PA." },
+    {
+      "id": "in-ocultacao",
+      "type": "skill",
+      "label": "Ocultação",
+      "cost": 6,
+      "tags": ["In"],
+      "requires": ["in"],
+      "reqStage": "Perito",
+      "notes": "Seus ataques (Comuns e de Técnica) recebem +3 de acerto."
+    },
+    {
+      "id": "in-mestre",
+      "type": "skill",
+      "label": "Mestre de In",
+      "cost": 10,
+      "tags": ["In"],
+      "requires": ["in-ocultacao"],
+      "reqStage": "Mestre",
+      "notes": "Fora de combate, Ocultação Completa sempre ativa sem consumir PA."
+    },
 
     {
       "id": "en",
@@ -196,12 +428,46 @@
       "desc": "Expande aura via Ren formando campo circular (Ten). Qualquer coisa na área é sentida imediatamente.",
       "characteristic": "Ação de poder: Teste Espírito (Percepção) com vantagem; percepção às cegas 3 m de raio. Consome 2 PA na ativação e por turno. Imune a Surpreso na área. Sobrecarga: desvantagem em Percepção se criaturas na área > Espírito; -1 para cada criatura acima de 30.",
       "techniques": [
-        { "id": "en-sentido-verdadeiro", "name": "En – Sentido Verdadeiro", "pa_cost": "5 PA", "duration": "Concentração", "range": "Pessoal", "requisite": "En, Ação Bônus", "text": "En expandido com benefícios avançados de detecção/alcance. Consome 5 PA na ativação e no início dos turnos." }
+        {
+          "id": "en-sentido-verdadeiro",
+          "name": "En – Sentido Verdadeiro",
+          "pa_cost": "5 PA",
+          "duration": "Concentração",
+          "range": "Pessoal",
+          "requisite": "En, Ação Bônus",
+          "text": "En expandido com sentido verdadeiro dentro da área. Mesmos benefícios de Detectar Aura. +1 em Percepção por ponto de Espírito. Sente criaturas/objetos como se estivesse tocando. Consome 5 PA na ativação e no início dos turnos."
+        }
       ]
     },
-    { "id": "en-sensitivo", "type": "skill", "label": "Sensitivo", "cost": 3, "tags": ["En"], "requires": ["en"], "notes": "Ao ser alvo de ataque, pode ser atingido para saber direção exata; vantagem e +10 em Percepção para encontrar o atacante." },
-    { "id": "en-aprimorar-sentidos", "type": "skill", "label": "Aprimorar Sentidos", "cost": 3, "tags": ["En"], "requires": ["en"], "notes": "+2 no Teste de Espírito (Percepção) da ativação do En. Pode ser adquirida várias vezes (+2 por compra).", "stackable": true },
-    { "id": "en-expansao-aura", "type": "skill", "label": "Expansão de Aura", "cost": 3, "tags": ["En"], "requires": ["en"], "stackable": true, "notes": "Área do En aumenta para 6 m. Pode comprar novamente (+6 m cada). Se usar até 1/3 do alcance, não consome aura por rodada." },
+    {
+      "id": "en-sensitivo",
+      "type": "skill",
+      "label": "Sensitivo",
+      "cost": 3,
+      "tags": ["En"],
+      "requires": ["en"],
+      "notes": "Ao ser alvo de ataque, pode ser atingido para saber direção exata; vantagem e +10 em Percepção para encontrar o atacante."
+    },
+    {
+      "id": "en-aprimorar-sentidos",
+      "type": "skill",
+      "label": "Aprimorar Sentidos",
+      "cost": 3,
+      "tags": ["En"],
+      "requires": ["en"],
+      "notes": "+2 no Teste de Espírito (Percepção) da ativação do En. Pode ser adquirida várias vezes (+2 por compra).",
+      "stackable": true
+    },
+    {
+      "id": "en-expansao-aura",
+      "type": "skill",
+      "label": "Expansão de Aura",
+      "cost": 3,
+      "tags": ["En"],
+      "requires": ["en"],
+      "stackable": true,
+      "notes": "Área do En aumenta para 6 m. Pode comprar novamente (+6 m cada). Se usar até 1/3 do alcance, não consome aura por rodada."
+    },
 
     {
       "id": "ryu",
@@ -214,14 +480,65 @@
       "desc": "Aplicação de Gyo focada em ataque/defesa alternando o fluxo entre partes do corpo.",
       "characteristic": "—",
       "techniques": [
-        { "id": "ryu-controle-aura", "name": "Ryu – Controle de Aura", "pa_cost": "3 PA (ativação/manutenção)", "duration": "Enquanto mantido", "range": "Pessoal", "requisite": "Ryu, Especial", "text": "Troca entre ofensiva e defensiva. Ofensivo: +2 dados de dano em ataque comum/técnica. Defensivo: reduza cada dano em 2d8. Consome 3 PA na ativação e no início dos turnos. Sem ação para ativar (apenas no seu turno)." },
-        { "id": "ryu-transferencia-rapida", "name": "Ryu – Transferência Rápida", "pa_cost": "5 PA", "duration": "Instantâneo", "range": "Especial", "requisite": "Ryu, Ação de Poder", "text": "Sequência de golpes impossíveis de desviar. Salvaguarda de Agilidade: falha → todo dano; sucesso → metade. Emissor: alcance 12 m. Alternativa: Reação até próximo turno — jogada de acerto contra golpe; se maior, dano máx 5 (ignora reduções). Dano: 6d8. Ataque Combinado: Possível." }
+        {
+          "id": "ryu-controle-aura",
+          "name": "Ryu – Controle de Aura",
+          "pa_cost": "3 PA (ativação/manutenção)",
+          "duration": "Enquanto mantido",
+          "range": "Pessoal",
+          "requisite": "Ryu, Especial",
+          "text": "Troca entre ofensiva e defensiva. Ofensivo: +2 dados de dano em ataque comum/técnica. Defensivo: reduza cada dano em 2d8. Consome 3 PA na ativação e no início dos turnos. Sem ação para ativar (apenas no seu turno)."
+        },
+        {
+          "id": "ryu-transferencia-rapida",
+          "name": "Ryu – Transferência Rápida",
+          "pa_cost": "5 PA",
+          "duration": "Instantâneo",
+          "range": "Especial",
+          "requisite": "Ryu, Ação de Poder",
+          "text": "Sequência de golpes impossíveis de desviar. Salvaguarda de Agilidade: falha → todo dano; sucesso → metade. Emissor: alcance 12 m. Alternativa: Reação até próximo turno — jogada de acerto contra golpe; se maior, dano máx 5 (ignora reduções). Dano: 6d8. Ataque Combinado: Possível."
+        }
       ]
     },
-    { "id": "ryu-fluxo-veloz", "type": "skill", "label": "Fluxo Veloz", "cost": 6, "tags": ["Ryu"], "requires": ["ryu"], "notes": "Pode manter Foco Agressivo e Foco Defensivo ativos ao mesmo tempo." },
-    { "id": "ryu-fluxo-perfeito", "type": "skill", "label": "Fluxo Perfeito", "cost": 10, "tags": ["Ryu"], "requires": ["ryu", "ryu-fluxo-veloz"], "notes": "Margem de crítico dos ataques comuns torna-se 19–20." },
-    { "id": "ryu-fluxo-constante", "type": "skill", "label": "Fluxo Constante", "cost": 10, "tags": ["Ryu"], "requires": ["ryu"], "notes": "Foco Agressivo aumenta 1 passo de dano e Foco Defensivo recebe +20 Pontos de Armadura." },
-    { "id": "ryu-ativacao-fluxo", "type": "skill", "label": "Ativação de Fluxo", "cost": 15, "tags": ["Ryu"], "requires": ["ryu-fluxo-constante"], "reqStage": "Mestre", "notes": "Com Fluxo Veloz ativo, aumente dados de dano de Explosão Ofensiva: até 2× o bônus de proficiência." },
+    {
+      "id": "ryu-fluxo-veloz",
+      "type": "skill",
+      "label": "Fluxo Veloz",
+      "cost": 6,
+      "tags": ["Ryu"],
+      "requires": ["ryu"],
+      "notes": "Pode manter Foco Agressivo e Foco Defensivo ativos ao mesmo tempo."
+    },
+    {
+      "id": "ryu-fluxo-perfeito",
+      "type": "skill",
+      "label": "Fluxo Perfeito",
+      "cost": 10,
+      "tags": ["Ryu"],
+      "requires": ["ryu-fluxo-veloz"],
+      "reqStage": "Perito",
+      "notes": "Margem de crítico dos ataques (Comuns e de Técnica) torna-se 19–20."
+    },
+    {
+      "id": "ryu-fluxo-constante",
+      "type": "skill",
+      "label": "Fluxo Constante",
+      "cost": 10,
+      "tags": ["Ryu"],
+      "requires": ["ryu"],
+      "reqStage": "Perito",
+      "notes": "Foco Agressivo aumenta 1 passo de dano e Foco Defensivo recebe +20 Pontos de Armadura."
+    },
+    {
+      "id": "ryu-ativacao-fluxo",
+      "type": "skill",
+      "label": "Ativação de Fluxo",
+      "cost": 15,
+      "tags": ["Ryu"],
+      "requires": ["ryu-fluxo-constante"],
+      "reqStage": "Mestre",
+      "notes": "Com Fluxo Veloz ativo, aumente dados de dano de Explosão Ofensiva: até 2× o bônus de proficiência."
+    },
 
     {
       "id": "ken",
@@ -234,11 +551,35 @@
       "desc": "Versão defensiva de Ren aplicada ao corpo todo. Aumenta drasticamente a força defensiva, mas é muito cansativo de manter.",
       "characteristic": "—",
       "techniques": [
-        { "id": "ken-defesa-absoluta", "name": "Ken – Defesa Absoluta", "pa_cost": "6 PA (ativação/manutenção)", "duration": "Especial", "range": "Pessoal", "requisite": "Ken, Especial", "text": "Imunidade a todos os tipos de dano sem aura. Reduz todo dano com aura pela metade. Não soma com nenhuma resistência. Consome 6 PA na ativação e por turno. Sem ação para ativar. Não usar junto de Ko – Ofensiva Absoluta." }
+        {
+          "id": "ken-defesa-absoluta",
+          "name": "Ken – Defesa Absoluta",
+          "pa_cost": "6 PA (ativação/manutenção)",
+          "duration": "Especial",
+          "range": "Pessoal",
+          "requisite": "Ken, Especial",
+          "text": "Imunidade a todos os tipos de dano sem aura. Reduz todo dano com aura pela metade. Não soma com nenhuma resistência. Consome 6 PA na ativação e por turno. Sem ação para ativar. Não usar junto de Ko – Ofensiva Absoluta."
+        }
       ]
     },
-    { "id": "ken-disputa-aura", "type": "skill", "label": "Disputa de Aura", "cost": 10, "tags": ["Ken"], "requires": ["ken"], "notes": "Reação + 10 PA: quando alvo de efeito intrusivo (Supressão, condição, efeito negativo), Teste Resistido de Espírito (Nen). Sucesso: nega efeito + imune até fim do turno." },
-    { "id": "ken-muralha-aura", "type": "skill", "label": "Muralha de Aura", "cost": 15, "tags": ["Ken"], "requires": ["ken"], "notes": "1×/descanso longo: Reação para reduzir dano de você e aliados em cone de 12 m atrás de você a 0 contra um ataque/jogada/técnica." },
+    {
+      "id": "ken-disputa-aura",
+      "type": "skill",
+      "label": "Disputa de Aura",
+      "cost": 10,
+      "tags": ["Ken"],
+      "requires": ["ken"],
+      "notes": "Reação + 10 PA: quando alvo de efeito intrusivo (Supressão, condição, efeito negativo), Teste Resistido de Espírito (Nen). Sucesso: nega efeito + imune até fim do turno."
+    },
+    {
+      "id": "ken-muralha-aura",
+      "type": "skill",
+      "label": "Muralha de Aura",
+      "cost": 15,
+      "tags": ["Ken"],
+      "requires": ["ken"],
+      "notes": "1×/descanso longo: Reação para reduzir dano de você e aliados em cone de 12 m atrás de você a 0 contra um ataque/jogada/técnica."
+    },
 
     {
       "id": "ko",
@@ -251,11 +592,43 @@
       "desc": "Gyo concentrado + Zetsu no restante: parte escolhida recebe 100% da aura — ataque extremamente poderoso mas deixa vulnerável.",
       "characteristic": "—",
       "techniques": [
-        { "id": "ko-ofensiva-absoluta", "name": "Ko – Ofensiva Absoluta", "pa_cost": "10 PA", "duration": "Instantâneo", "range": "Toque (Emissor: 21 m)", "requisite": "Ko, Ação de Poder", "text": "Golpe concentrando 100% da aura. Vantagem no acerto. Margem crítica 18–20. Perde 2 de CR até próximo turno. Dano: 10d10 contundente/cortante/perfurante." },
-        { "id": "ko-bloqueio-emergencial", "name": "Ko – Bloqueio Emergencial", "pa_cost": "4 PA", "duration": "Especial", "range": "Pessoal", "requisite": "Ko, Reação", "text": "Reação: role 1d20. Resultado 6–20: concentra aura no ponto de impacto, dano máximo 20 PD (não pode ficar com <1 PV). Resultado 1–5: aura no ponto errado, ataque acerta automaticamente com dano dobrado (soma com crítico). Rolagem não pode ser modificada." }
+        {
+          "id": "ko-ofensiva-absoluta",
+          "name": "Ko – Ofensiva Absoluta",
+          "pa_cost": "10 PA",
+          "duration": "Instantâneo",
+          "range": "Toque (Emissor: 21 m)",
+          "requisite": "Ko, Ação de Poder",
+          "text": "Golpe concentrando 100% da aura. Vantagem no acerto. Margem crítica 18–20. Perde 2 de CR até próximo turno. Dano: 10d10 contundente/cortante/perfurante."
+        },
+        {
+          "id": "ko-bloqueio-emergencial",
+          "name": "Ko – Bloqueio Emergencial",
+          "pa_cost": "4 PA",
+          "duration": "Especial",
+          "range": "Pessoal",
+          "requisite": "Ko, Reação",
+          "text": "Reação: role 1d20. Resultado 6–20: concentra aura no ponto de impacto, dano máximo 20 PD (não pode ficar com <1 PV). Resultado 1–5: aura no ponto errado, ataque acerta automaticamente com dano dobrado (soma com crítico). Rolagem não pode ser modificada."
+        }
       ]
     },
-    { "id": "ko-acumulo-extremo", "type": "skill", "label": "Acúmulo Extremo", "cost": 10, "tags": ["Ko"], "requires": ["ko"], "notes": "Pague 4 PA para que o próximo dano se torne do tipo 'Verdadeiro'." },
-    { "id": "ko-mestre", "type": "skill", "label": "Mestre de Ko", "cost": 15, "tags": ["Ko"], "requires": ["ko"], "notes": "Pode colocar quantos dados de Explosão Ofensiva quiser (limite = aura gerada disponível), mas CR se torna 0 até o início do próximo turno se adicionar mais que seu nível de personagem." }
+    {
+      "id": "ko-acumulo-extremo",
+      "type": "skill",
+      "label": "Acúmulo Extremo",
+      "cost": 10,
+      "tags": ["Ko"],
+      "requires": ["ko"],
+      "notes": "Pague 4 PA para que o próximo dano se torne do tipo 'Verdadeiro'."
+    },
+    {
+      "id": "ko-mestre",
+      "type": "skill",
+      "label": "Mestre de Ko",
+      "cost": 15,
+      "tags": ["Ko"],
+      "requires": ["ko"],
+      "notes": "Pode colocar quantos dados de Explosão Ofensiva quiser (limite = aura gerada disponível), mas CR se torna 0 até o início do próximo turno se adicionar mais que seu nível de personagem."
+    }
   ]
 }
